@@ -1,5 +1,5 @@
 # tppo_5121
-## lab1_tppo
+## lab1_tppo_5121
 - для запуска сервера:
 ```ruby
 python3 tppo_server_5121.py 127.0.0.1 12345
