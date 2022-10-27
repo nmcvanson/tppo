@@ -43,7 +43,12 @@ class Server():
             recv_data = conn.recv(self.SIZE).decode(self.FORMAT)
             recv_data = recv_data.title().split()
             lock.acquire()
-            if recv_data:
+            if not recv_data:
+                print(f"Closing connection to {addr}")
+                connected = False
+                conn.close()
+                self.clients.remove(conn)
+            else:
                 if recv_data == ["Exit"]:
                     print(f"Closing connection to {addr}")
                     connected = False
@@ -51,10 +56,20 @@ class Server():
                     conn.close()
                 elif recv_data[0] == "Get":
                     msg = self.response_get(params = recv_data[1])
-                    conn.send(msg.encode(self.FORMAT))
+                    try:
+                        conn.send(msg.encode(self.FORMAT))
+                    except socket.error:
+                        print(f"Closing connection to {addr}")
+                        connected = False
+                        self.clients.remove(conn)
                 elif recv_data[0] == "Set":
                     msg = self.response_set(params = recv_data[1], values = recv_data[2])
-                    conn.send(msg.encode(self.FORMAT))
+                    try:
+                        conn.send(msg.encode(self.FORMAT))
+                    except socket.error:
+                        print(f"Closing connection to {addr}")
+                        connected = False
+                        self.clients.remove(conn)
             lock.release()
 
     def notify_changes(self):
@@ -76,12 +91,22 @@ class Server():
                 elif (blinds_params['current_luminous_flux'] != luminous_flux_percentage):
                     blinds_params['current_luminous_flux'] = luminous_flux_percentage
                     for client in self.clients:
-                        client.send(f"Luminous fluxpercentage has been changed to {luminous_flux_percentage}%".encode(self.FORMAT))
+                        try: 
+                            client.send(f"Luminous fluxpercentage has been changed to {luminous_flux_percentage}%".encode(self.FORMAT))
+                        except socket.error:
+                            print(f"Closing connection to {addr}")
+                            connected = False
+                            self.clients.remove(conn)
                 elif (blinds_params['current_illumination'] != current_illumination):
                     blinds_params['current_illnation'] = current_illumination
                     for client in self.clients:
-                        client.send(f"Current illumination has been changed to {current_illumination} lx".encode(self.FORMAT))
-    
+                        try:
+                            client.send(f"Current illumination has been changed to {current_illumination} lx".encode(self.FORMAT))
+                        except:
+                            print(f"Closing connection to {addr}")
+                            connected = False
+                            self.clients.remove(conn)
+
     def check_conn(self, conn):
         connExists = False
         for client in self.clients:
@@ -102,7 +127,6 @@ class Server():
             cli_thread = threading.Thread(target=self.handle_client, args= (conn, addr))
             cli_thread.daemon = True
             cli_thread.start()
-            print(f"[ACTIVE CONNECTIONS] {threading.activeCount() - 2}")
 
 lock = threading.Lock()
 device = Blinds()
