@@ -1,0 +1,3 @@
+Shift percent 5
+Luminous flux percent 0
+Current illumitation 7
