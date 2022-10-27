@@ -20,13 +20,19 @@ class Blinds():
     def __init__(self):
         self.shift_percentage, self.luminous_flux_percentage, self.current_illumination = self.get_params()
 
-    def get_shift_percentage(self):
+    def get_shift_percentage(self, path = path):
+        data =  self.read_database(path)
+        self.shift_percentage = int(data[0].split()[-1])
         return self.shift_percentage
     
-    def get_luminous_flux_percentage(self):
+    def get_luminous_flux_percentage(self, path = path):
+        data = self.read_database(path)
+        self.luminous_flux_percentage = int(data[1].split()[-1])
         return self.luminous_flux_percentage
 
-    def get_current_illumination(self):
+    def get_current_illumination(self, path = path):
+        data = self.read_database(path)
+        self.current_illumination = int(data[2].split()[-1])
         return self.current_illumination
 
     def set_shift(self, new_shift, path = path):
