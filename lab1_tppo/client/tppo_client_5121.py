@@ -43,17 +43,17 @@ class Client:
                 self.invalid_cmd = True
         
         elif len (cmd) == 2:
-            if cmd[0] == "Set" and cmd[1] in ["Shift_Percent", "Luminous_Flux_Percent", "Current_Illumination"]:
+            if cmd[0] == "Set" and cmd[1] in ["Shift_Percent", "Flux_Percent", "Current_Ill"]:
                 print(f"SyntaxError: Give a value for param {cmd[1]}")
                 self.invalid_cmd = True
-            elif cmd[0] != "Get" or cmd[1] not in ["Shift_Percent", "Luminous_Flux_Percent", "Current_Illumination"]:
+            elif cmd[0] != "Get" or cmd[1] not in ["Shift_Percent", "Flux_Percent", "Current_Ill"]:
                 print("SyntaxError: Not supported this command!")
                 self.invalid_cmd = True
         elif len(cmd) == 3:
             if cmd[0] != "Set":
                 print("SyntaxError: Not supported this command!")
                 self.invalid_cmd = True
-            elif cmd[1] not in ["Shift_Percent", "Luminous_Flux_Percent", "Current_Illumination"]:
+            elif cmd[1] not in ["Shift_Percent", "Flux_Percent", "Current_Ill"]:
                 print(f"SyntaxError: Not supported this parameter {cmd[1]}!")
                 self.invalid_cmd = True
             elif not cmd[2].isdigit():

@@ -23,16 +23,16 @@ class Server():
     def response_get(self, params):
         if params == "Shift_Percent":
             msg = f"Current {params}: {self.device.get_shift_percentage()}%"
-        elif params == "Luminous_Flux_Percent":
+        elif params == "Flux_Percent":
             msg = f"Current {params}: {self.device.get_luminous_flux_percentage()}%"
-        elif params == "Current_Illumination":
-            msg = f"Current {params}: {self.device.get_current_illumination()} lx"
+        elif params == "Current_Ill":
+            msg = f"{params}: {self.device.get_current_illumination()} lx"
         return msg
 
     def response_set(self, params, values):
         if params == "Shift_Percent":
             self.device.set_shift(values)
-        elif params == "Luminous_Flux_Percent":
+        elif params == "Flux_Percent":
             self.device.set_luminous_flux(values)
         return f"{params} was successful changed to {values}%"
 

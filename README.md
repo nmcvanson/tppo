@@ -15,7 +15,7 @@ python3 tppo_client_5121.py 127.0.0.1 12345
       ```
   - Установить проценты сдвига пропуска светового потока:
       ```ruby
-      set luminous_flux_percent <value>
+      set flux_percent <value>
       ```
   - Получить значения процентов сдвига полотна:
       ```ruby
@@ -23,11 +23,11 @@ python3 tppo_client_5121.py 127.0.0.1 12345
       ```
   - Получить значения процентов пропуска светового потока:
       ```ruby
-      get luminous_flux_percent
+      get flux_percent
       ```
   - Получить значения текущей освещенности с внешней стороны.:
       ```ruby
-      get current_illumination
+      get current_ill
       ```
   - Отключить от сервера:
       ```ruby
