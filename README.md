@@ -39,14 +39,14 @@ python3 tppo_client_5121.py 127.0.0.1 12345
 - для запуска сервера:
 
 ```ruby
-[//]: # (установить небходимые библиотеки)
+# установить небходимые библиотеки
 pip3 install -r requirements.txt 
 
 python3 tppo_server_5121.py 127.0.0.1 12345
 ```
 - для запуска клиента:
 ```ruby
-[//]: # (установить небходимые библиотеки)
+# установить небходимые библиотеки
 pip3 install -r requirements.txt 
 
 python3 tppo_client_5121.py 127.0.0.1 12345
@@ -72,6 +72,3 @@ python3 tppo_client_5121.py 127.0.0.1 12345
       ```ruby
       get current_ill
       ```
-  - Отключить от сервера:
-      ```ruby
-      exit

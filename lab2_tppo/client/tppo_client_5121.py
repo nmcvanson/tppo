@@ -2,7 +2,6 @@ import socketio
 import requests
 import sys
 
-
 sio_client = socketio.Client()
 
 def get_param(param):

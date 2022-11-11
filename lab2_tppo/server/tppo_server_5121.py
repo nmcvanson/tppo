@@ -5,8 +5,6 @@ from blinds import *
 import os
 import sys
 
-
-
 app = Flask(__name__)
 socketio = SocketIO(app)
 mutex = threading.Lock()
@@ -36,7 +34,7 @@ def main(param):
         return "Not supported this parameters!!"
     return {param: value}
 
-@app.route('/blind')   #Query String: http://host_ip/blind?<param>=<value>
+@app.route('/blind')
 def get_query_string():
     shift_percent = request.args.get('shift_percent')
     flux_percent = request.args.get('flux_percent')
